@@ -5,6 +5,7 @@ import { darkSkyAPIkey } from './darksky-api.js';
 import sampleData from './sampleData.json';
 import ZipForm from './ZipForm.js';
 import DarkSky from './DarkSky.js';
+import CurrentWeather from './CurrentWeather.js';
 
 class App extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class App extends Component {
       zip: '78752',
       locData: {},
       weather: {},
+      initialized: false
     };
 
     this.handleZip = this.handleZip.bind(this);
@@ -39,7 +41,7 @@ class App extends Component {
       });
 
       // Get weather data with loc data
-      const url_weather = "https://cors.io/?https://api.darksky.net/forecast/" + darkSkyAPIkey + "/" + locData.latitude + "," + locData.longitude;
+      const url_weather = "https://corsanywhere.herokuapp.com/https://api.darksky.net/forecast/" + darkSkyAPIkey + "/" + locData.latitude + "," + locData.longitude;
       const weather = await axios.get(url_weather).then(res => {
         const data = res.data;
         return data;
@@ -55,6 +57,7 @@ class App extends Component {
     this.setState({
       locData: locData,
       weather: weather,
+      initialized: true
     });
 
     console.log('locData: ', locData);
@@ -70,6 +73,11 @@ class App extends Component {
             value={this.state.zip}
             handleSubmit={this.getWeather}
             handleChange={this.handleZip}
+            />
+          <CurrentWeather
+            weather={this.state.weather.currently}
+            location={this.state.locData}
+            init={this.state.initialized}
             />
           <DarkSky />
         </main>

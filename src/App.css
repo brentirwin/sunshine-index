@@ -29,3 +29,32 @@ main {
 #darksky img {
   width: 100%;
 }
+
+#current {
+  background: #ddd;
+  border-radius: 20px;
+  margin: 10px;
+}
+
+#current h2 {
+  margin: 0;
+}
+
+#current-weather {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  text-align: left;
+}
+
+#current-weather .left {
+  font-size: 3em;
+  font-weight: 700;
+  padding: 0 20px 0 20px;
+}
+
+#current-weather .right ul {
+  margin: 0px;
+  list-style-type: none;
+  padding: 0;
+}
