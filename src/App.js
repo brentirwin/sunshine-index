@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
-import { darkSkyAPIkey } from './darksky.js';
+import { darkSkyAPIkey } from './darksky-api.js';
+import sampleData from './sampleData.json';
+import ZipForm from './ZipForm.js';
+import DarkSky from './DarkSky.js';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       zip: '78752',
-      weather: {}
+      locData: {},
+      weather: {},
     };
 
     this.handleZip = this.handleZip.bind(this);
@@ -21,48 +25,54 @@ class App extends Component {
 
   async getWeather(event) {
     event.preventDefault();
+
     async function getData(zip) {
+      // Dev without making API calls
+      if (zip === '78752') return sampleData;
+
       // Get loc data from ZIP
-      console.log('in getData');
       const url_zip = "https://api.zippopotam.us/us/" + zip;
       const locData = await axios.get(url_zip).then(res => {
-        const loc = res.data.places[0]
-        return [loc.latitude, loc.longitude];
+        return res.data.places[0];
       }).catch(err => {
         console.log('Not a valid ZIP');
       });
 
-      console.log(locData);
       // Get weather data with loc data
-      const url_weather = "https://api.darksky.net/forecast/" + darkSkyAPIkey + "/" + locData[0] + "," + locData[1];
+      const url_weather = "https://cors.io/?https://api.darksky.net/forecast/" + darkSkyAPIkey + "/" + locData.latitude + "," + locData.longitude;
       const weather = await axios.get(url_weather).then(res => {
         const data = res.data;
-        console.log(data);
         return data;
       }).catch(err => {
         console.log('error with darkSky API');
         console.log(err);
       });
-      return weather;
+      return { locData, weather };
     }
     
-    const rawWeather = await getData(this.state.zip);
-    console.log(rawWeather);
+    const { locData, weather } = await getData(this.state.zip);
+   
+    this.setState({
+      locData: locData,
+      weather: weather,
+    });
+
+    console.log('locData: ', locData);
+    console.log('weather: ', weather);
   
-  console.log(event);
   }
 
   render() {
     return (
       <div className="App">
-        <form onSubmit={this.getWeather}>
-          <input
-            type="text"
+        <main>
+          <ZipForm
             value={this.state.zip}
-            onChange={this.handleZip}
+            handleSubmit={this.getWeather}
+            handleChange={this.handleZip}
             />
-          <input type="submit" value="Submit" />
-        </form>
+          <DarkSky />
+        </main>
       </div>
     );
   }
