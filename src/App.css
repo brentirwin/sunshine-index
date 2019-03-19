@@ -58,3 +58,15 @@ main {
   list-style-type: none;
   padding: 0;
 }
+
+.uv-key {
+  display: table;
+  width: 80%;
+  margin: auto;
+  padding: 5px;
+  table-layout: fixed;
+}
+
+.uv-key div {
+  display: table-cell;
+}

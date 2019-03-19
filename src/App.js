@@ -6,6 +6,7 @@ import sampleData from './sampleData.json';
 import ZipForm from './ZipForm.js';
 import DarkSky from './DarkSky.js';
 import CurrentWeather from './CurrentWeather.js';
+import UVKey from './UVKey.js';
 
 class App extends Component {
   constructor(props) {
@@ -74,6 +75,7 @@ class App extends Component {
             handleSubmit={this.getWeather}
             handleChange={this.handleZip}
             />
+          <UVKey />
           <CurrentWeather
             weather={this.state.weather.currently}
             location={this.state.locData}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { colorMap } from './colors.js';
 
 const CurrentWeather = props => {
   if (!props.init) return null;
@@ -16,9 +17,16 @@ const CurrentWeather = props => {
     wind: props.weather.windSpeed
   };
 
+  const styles = () => {
+    const color = colorMap(weather.uv);
+    return {
+      backgroundColor: color + '80',
+      border: '5px solid ' + color
+    }
+  }
 
   return(
-    <div id="current">
+    <div id="current" style={styles()}>
       <h2>{location}</h2>
       <div id="current-weather">
         <div className="left">
