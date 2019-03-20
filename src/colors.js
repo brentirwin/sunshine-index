@@ -1,6 +1,4 @@
-export { colorMap };
-
-const colorMap = num => {
+export const colorMap = num => {
   const colors = ['99e6cc', // 0
                   'cce6cc', // 1
                   'cce600', // 2

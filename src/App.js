@@ -7,6 +7,7 @@ import ZipForm from './ZipForm.js';
 import DarkSky from './DarkSky.js';
 import CurrentWeather from './CurrentWeather.js';
 import UVKey from './UVKey.js';
+import FutureWeather from './FutureWeather.js';
 
 class App extends Component {
   constructor(props) {
@@ -67,6 +68,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.weather);
     return (
       <div className="App">
         <main>
@@ -79,6 +81,10 @@ class App extends Component {
           <CurrentWeather
             weather={this.state.weather.currently}
             location={this.state.locData}
+            init={this.state.initialized}
+            />
+          <FutureWeather
+            hourly={this.state.weather.hourly}
             init={this.state.initialized}
             />
           <DarkSky />

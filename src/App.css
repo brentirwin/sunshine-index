@@ -31,7 +31,6 @@ main {
 }
 
 #current {
-  background: #ddd;
   border-radius: 20px;
   margin: 10px;
 }
@@ -68,5 +67,17 @@ main {
 }
 
 .uv-key div {
+  display: table-cell;
+}
+
+#future-weather div {
+  margin: 5px 10px 5px 10px;
+  border-radius: 10px;
+  width: calc(100% - 30px);
+  display: table;
+  table-layout: fixed;
+}
+
+#future-weather div span {
   display: table-cell;
 }
