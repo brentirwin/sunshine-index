@@ -1,5 +1,6 @@
 import React from 'react';
 import { colorMap } from './colors.js';
+import Skycons from 'react-skycons';
 
 const CurrentWeather = props => {
   if (!props.init) return null;
@@ -9,7 +10,7 @@ const CurrentWeather = props => {
                    + props.location['state abbreviation'];
   const weather = {
     temp: Math.round(props.weather.temperature),
-    icon: props.weather.icon,
+    icon: props.weather.icon.toUpperCase().replace('-','_'),
     feelsLike: Math.round(props.weather.apparentTemperature),
     humidity: props.weather.humidity,
     clouds: props.weather.cloudCover,
@@ -25,6 +26,8 @@ const CurrentWeather = props => {
     }
   }
 
+
+  console.log(weather.icon);
   return(
     <div id="current" style={styles()}>
       <h2>{location}</h2>
@@ -32,12 +35,18 @@ const CurrentWeather = props => {
         <div className="left">
           {weather.temp}°
         </div>
-        <div className="right">
+        <div className="middle">
           <ul>
             <li>UV Index: {weather.uv}</li>
             <li>Feels Like: {weather.feelsLike}°</li>
             <li>Humidity: {weather.humidity}</li>
           </ul>
+        </div>
+        <div className="right">
+          <Skycons
+            color='black'
+            icon={weather.icon}
+            />
         </div>
       </div>
     </div>

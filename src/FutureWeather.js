@@ -1,16 +1,16 @@
 import React from 'react';
 import { colorMap } from './colors.js';
 import { times } from './times.js';
+import Skycon from 'react-skycons';
 
 const FutureWeather = props => {
   if (!props.init) return null;
 
   const hourly = props.hourly.data.slice(0,12).map((hour, key) => {
     const time = new Date(hour.time*1000).getHours();
-    console.log(parseInt(time));
     const weather = {
       temp: Math.round(hour.temperature),
-      icon: hour.icon,
+      icon: hour.icon.toUpperCase().split('-').join('_'),
       uv: hour.uvIndex,
       time: times(parseInt(time))
     };
@@ -23,6 +23,8 @@ const FutureWeather = props => {
       }
     }
 
+    console.log(weather.time, weather.icon);
+
     return (
       <div
         key={key}
@@ -32,6 +34,14 @@ const FutureWeather = props => {
         <span className="time">{weather.time}</span>
         <span className="temp">{weather.temp}</span>
         <span className="uv">{weather.uv}</span>
+        <span className="skycon">
+          <div>
+          <Skycon
+            color="black"
+            icon={weather.icon}
+          />
+          </div>
+        </span>
       </div>
     );
   });
@@ -46,6 +56,7 @@ const FutureWeather = props => {
         <span>Time</span>
         <span>Temp</span>
         <span>UV</span>
+        <span></span>
       </div>
       {hourly}
     </div>

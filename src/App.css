@@ -23,7 +23,7 @@ main {
   background-color: #ccc;
   margin-left: auto;
   margin-right: auto;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 #darksky img {
@@ -80,4 +80,10 @@ main {
 
 #future-weather div span {
   display: table-cell;
+}
+
+.skycon canvas {
+  display: inline;
+  height: 1em;
+  width: 1em;
 }
