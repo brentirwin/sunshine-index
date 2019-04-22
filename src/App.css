@@ -87,3 +87,16 @@ main {
   height: 1em;
   width: 1em;
 }
+
+.hour > span {
+  padding-top: 0;
+}
+
+.middle li {
+  list-style: none;
+  white-space: nowrap;
+}
+
+.middle ul {
+  padding: 0;
+}

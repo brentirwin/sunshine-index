@@ -10,7 +10,7 @@ const CurrentWeather = props => {
                    + props.location['state abbreviation'];
   const weather = {
     temp: Math.round(props.weather.temperature),
-    icon: props.weather.icon.toUpperCase().replace('-','_'),
+    icon: props.weather.icon.toUpperCase().split('-').join('_'),
     feelsLike: Math.round(props.weather.apparentTemperature),
     humidity: props.weather.humidity,
     clouds: props.weather.cloudCover,
@@ -37,9 +37,9 @@ const CurrentWeather = props => {
         </div>
         <div className="middle">
           <ul>
-            <li>UV Index: {weather.uv}</li>
-            <li>Feels Like: {weather.feelsLike}°</li>
-            <li>Humidity: {weather.humidity}</li>
+            <li>UV Index: <b>{weather.uv}</b></li>
+            <li>Feels Like: <b>{weather.feelsLike}°</b></li>
+            <li>Humidity: <b>{weather.humidity}</b></li>
           </ul>
         </div>
         <div className="right">

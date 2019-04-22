@@ -23,8 +23,6 @@ const FutureWeather = props => {
       }
     }
 
-    console.log(weather.time, weather.icon);
-
     return (
       <div
         key={key}

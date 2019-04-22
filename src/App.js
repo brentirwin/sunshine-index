@@ -13,7 +13,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      zip: '78752',
+      zip: 'test',
       locData: {},
       weather: {},
       initialized: false
@@ -32,7 +32,7 @@ class App extends Component {
 
     async function getData(zip) {
       // Dev without making API calls
-      if (zip === '78752') return sampleData;
+      if (zip === 'test') return sampleData;
 
       // Get loc data from ZIP
       const url_zip = "https://api.zippopotam.us/us/" + zip;
@@ -68,7 +68,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.weather);
     return (
       <div className="App">
         <main>
