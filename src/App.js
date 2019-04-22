@@ -16,7 +16,8 @@ class App extends Component {
       zip: 'test',
       locData: {},
       weather: {},
-      initialized: false
+      initialized: false,
+      loading: false
     };
 
     this.handleZip = this.handleZip.bind(this);
@@ -29,6 +30,8 @@ class App extends Component {
 
   async getWeather(event) {
     event.preventDefault();
+
+    this.setState({ loading: true });
 
     async function getData(zip) {
       // Dev without making API calls
@@ -59,6 +62,7 @@ class App extends Component {
     this.setState({
       locData: locData,
       weather: weather,
+      loading: false,
       initialized: true
     });
 
@@ -77,6 +81,9 @@ class App extends Component {
             handleChange={this.handleZip}
             />
           <UVKey />
+          <p>
+            { this.state.loading ? 'Loading...' : '' }
+          </p>
           <CurrentWeather
             weather={this.state.weather.currently}
             location={this.state.locData}
