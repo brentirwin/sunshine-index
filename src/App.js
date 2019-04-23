@@ -13,7 +13,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      zip: 'test',
+      zip: 'enter zip',
       locData: {},
       weather: {},
       initialized: false,
@@ -31,11 +31,16 @@ class App extends Component {
   async getWeather(event) {
     event.preventDefault();
 
+    // Quick check if ZIP is 5 digits
+    const regex = /^\d{1,5}$/;
+    if (!regex.test(this.state.zip) && this.state.zip !== 'enter zip')
+      return;
+
     this.setState({ loading: true });
 
     async function getData(zip) {
       // Dev without making API calls
-      if (zip === 'test') return sampleData;
+      if (zip === 'enter zip') return sampleData;
 
       // Get loc data from ZIP
       const url_zip = "https://api.zippopotam.us/us/" + zip;
