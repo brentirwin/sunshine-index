@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/sunshine-index/static/media/darksky.80edb981.png"
   },
   {
-    "revision": "323a778a318022aa0bb42610e20e9db9",
+    "revision": "ad7eb63d1cd48b91b2841e5bc9bfabdd",
     "url": "/sunshine-index/index.html"
   }
 ];
